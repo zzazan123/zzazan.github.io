@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my webhook</title>
+    <style>
+        body {
+            zoom: 500%;
+        }
+
+        #sendButton {
+            background-color: palegreen;
+        }
+
+        #changeWebhookURL {
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        window.addEventListener("load", () => {
+            let enterWebHookURL = document.querySelector("#enterWebHookURL");
+            let webhookInput = document.querySelector("#webhookInput");
+            let webhookURLBtn = document.querySelector("#webhookURLBtn");
+            let form = document.querySelector("form");
+            let msgInput = document.querySelector("#msgInput");
+            let sendButton = document.querySelector("#sendButton");
+            let changeWebhookURL = document.querySelector("#changeWebhookURL");
+            let sendMsg = document.querySelector("#sendMsg");
+
+            if (localStorage.getItem("webhookURL") == null || localStorage.getItem("webhookURL") == undefined) {
+                enterWebHookURL.hidden = false;
+            } else {
+                sendMsg.hidden = false;
+                form.action = localStorage.getItem("webhookURL");
+            }
+
+            webhookInput.addEventListener("keydown", (e) => {
+                if (e.keyCode == 13) {
+                    localStorage.setItem("webhookURL", webhookInput.value);
+                    enterWebHookURL.hidden = true;
+                    sendMsg.hidden = false;
+                    form.action = webhookInput.value;
+                }
+            });
+
+            webhookURLBtn.addEventListener("click", () => {
+                localStorage.setItem("webhookURL", webhookInput.value);
+                enterWebHookURL.hidden = true;
+                sendMsg.hidden = false;
+                form.action = webhookInput.value;
+            })
+
+            msgInput.addEventListener("keydown", (e) => {
+                if (e.keyCode == 13) {
+                    setTimeout(() => {
+                        msgInput.value = "";
+                    }, 100);
+                }
+            });
+
+            sendButton.addEventListener("click", () => {
+                setTimeout(() => {
+                    msgInput.value = "";
+                }, 100);
+            });
+
+            changeWebhookURL.addEventListener("click", () => {
+                localStorage.removeItem("webhookURL");
+                window.location.reload();
+            });
+        });
+    </script>
+</head>
+<body>
+    <body>
+        <center>
+            <div id="enterWebHookURL" hidden>
+                <input id="webhookInput" placeholder="enter webhook url" autofocus>
+                <button id="webhookURLBtn">enter!</button>
+            </div>
+    
+            <div id="sendMsg" hidden>
+                <form method="post">
+                    <input name="content" placeholder="message" id="msgInput" autofocus>
+                    <input type="submit" value="send!" id="sendButton">
+                </form>
+                <button id="changeWebhookURL">change webhook url</button>
+            </div>
+        </center>
+    <body>
+</body>
+</html>
