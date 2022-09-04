@@ -1,66 +1,71 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>핼리올리</title>
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <style>
-    body {
-      zoom: 400%;
-    }
+    <meta charset="UTF-8">
+    <title>핼리올리</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script type="module" src="https://unpkg.com/@fluentui/web-components"></script>
+    <style>
+        body {
+            zoom: 400%;
+        }
 
-    * {
-      -webkit-user-select: none;
-      user-select: none;
-    }
+        * {
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
-    * {
-      font-size: 50px;
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-    }
-  </style>
-  <script>
-    window.addEventListener("load", () => {
-      const card = document.querySelector("#card");
-      const count = document.querySelector("#count");
-      
-      document.querySelector("#gocard").addEventListener("click", () => {
-        click();
+        h1 {
+            font-size: 50px;
+            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+        }
 
-        count.innerHTML = parseInt(count.innerHTML) + 1;
-      });
+        fluent-button {
+            zoom: 250%;
+        }
+    </style>
+    <script>
+        window.addEventListener("load", () => {
+            const card = document.querySelector("#card");
+            const count = document.querySelector("#count");
 
-      document.querySelector("#clear").addEventListener("click", () => {
-        count.innerHTML = "0";
-        card.innerHTML = "클릭하셈";
-      });
-    });
-    
-    function click() {
-      const rand = Math.floor(Math.random() * 14);
+            document.querySelector("#gocard").addEventListener("click", () => {
+                click();
 
-      if (rand >= 0 && rand <= 9) {
-        card.innerHTML = rand + 1;
-      } else if (rand == 10) {
-        card.innerHTML = "Q";
-      } else if (rand == 11) {
-        card.innerHTML = "J";
-      } else if (rand == 12) {
-        card.innerHTML = "K";
-      } else if (rand == 13) {
-        card.innerHTML = "조커!";
-      }
-    }
-  </script>
+                count.innerHTML = parseInt(count.innerHTML) + 1;
+            });
+
+            document.querySelector("#clear").addEventListener("click", () => {
+                count.innerHTML = "0";
+                card.innerHTML = "클릭하셈";
+            });
+        });
+
+        function click() {
+            const rand = Math.floor(Math.random() * 14);
+
+            if (rand >= 0 && rand <= 9) {
+                card.innerHTML = rand + 1;
+            } else if (rand == 10) {
+                card.innerHTML = "Q";
+            } else if (rand == 11) {
+                card.innerHTML = "J";
+            } else if (rand == 12) {
+                card.innerHTML = "K";
+            } else if (rand == 13) {
+                card.innerHTML = "조커!";
+            }
+        }
+    </script>
 </head>
 
 <body>
-  <center>
-    <h1 id="card">클릭하셈</h1>
-    <button id="gocard">카드 내기</button>
-    <h1 id="count">0</h1>
-    <button id="clear">clear</button>
-  </center>
+    <center>
+        <h1 id="card">클릭하셈</h1>
+        <fluent-button id="gocard">카드 내기</fluent-button>
+        <h1 id="count">0</h1>
+        <fluent-button id="clear">clear</fluent-button>
+    </center>
 </body>
 
 </html>
